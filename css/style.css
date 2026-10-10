@@ -1150,7 +1150,7 @@ h1, h2, h3, h4 {
     -webkit-overflow-scrolling: touch;
   }
   .header-inner { flex-wrap: wrap; padding-bottom: .4rem; }
-  .my-events-btn { margin-left: auto; }
+  .my-events-btn { order:2; width:100%; min-height:42px; flex:0 0 100%; margin:0; justify-content:center; }
   .events-head { flex-direction: column; align-items: stretch; }
   .search-box { width: 100%; }
   .footer-grid { grid-template-columns: 1fr; gap: 1.6rem; }
@@ -1412,32 +1412,6 @@ html[data-theme="dark"] .back-link { color:#f6f1e8; }
 html[data-theme="dark"] .back-link:hover { color:#ff9b55; }
 html[data-theme="dark"] .back-link:focus-visible { outline:2px solid #ff9b55; outline-offset:4px; border-radius:3px; }
 
-@media (max-width:560px) {
-  .my-events-btn {
-    display:grid;
-    place-items:center;
-    width:40px;
-    min-width:40px;
-    height:40px;
-    min-height:40px;
-    flex:0 0 40px;
-    padding:0;
-    border-radius:50%;
-    font-size:0;
-    line-height:0;
-  }
-  .my-events-btn svg { display:block; width:18px; height:18px; }
-  .my-events-btn .badge-dot {
-    position:absolute;
-    top:-4px;
-    right:-5px;
-    min-width:18px;
-    height:18px;
-    padding:0 4px;
-    font-size:.68rem;
-    line-height:1;
-  }
-}
 @media (max-width:380px) {
   .header-inner { column-gap:.55rem; }
   .header-inner > .brand { gap:.4rem; }
