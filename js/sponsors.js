@@ -12,19 +12,27 @@
 
     var mark;
     if (sponsor.logoPath) {
-      mark = document.createElement('img');
-      mark.className = 'sponsor-logo-image';
-      mark.src = sponsor.logoPath;
-      mark.alt = sponsor.description || (sponsor.name + ' logo');
-      mark.decoding = 'async';
-      mark.width = 180;
-      mark.height = 64;
+      mark = document.createElement('span');
+      mark.className = 'sponsor-brand';
+      var image = document.createElement('img');
+      image.className = 'sponsor-logo-image';
+      image.src = sponsor.logoPath;
+      image.alt = '';
+      image.setAttribute('aria-hidden', 'true');
+      image.decoding = 'async';
+      image.width = 64;
+      image.height = 64;
+      var name = document.createElement('span');
+      name.className = 'sponsor-brand-name';
+      name.textContent = sponsor.name;
+      mark.appendChild(image);
+      mark.appendChild(name);
     } else {
       mark = document.createElement('span');
       mark.className = 'sponsor-wordmark sponsor-wordmark--' + (sponsor.style || 'wide');
       mark.textContent = sponsor.logoText || sponsor.name;
       mark.setAttribute('role', 'img');
-      mark.setAttribute('aria-label', sponsor.description || (sponsor.name + ' logo placeholder'));
+      mark.setAttribute('aria-label', sponsor.description || (sponsor.name + ' logo'));
     }
 
     if (/^https:\/\//i.test(sponsor.href || '')) {

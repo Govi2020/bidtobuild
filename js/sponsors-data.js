@@ -1,14 +1,16 @@
-/* Replace these obvious placeholders with confirmed sponsor records and logo paths. */
+/* Illustrative technology brands for the prototype; these are not confirmed PRISM sponsors. */
 (function () {
   'use strict';
 
   window.App = window.App || {};
   window.App.sponsorData = [
-    { name: 'Sponsor placeholder 01', logoPath: '', logoText: 'YOUR BRAND', href: '', description: 'Temporary sponsor logo placeholder 01', style: 'wide' },
-    { name: 'Sponsor placeholder 02', logoPath: '', logoText: 'SPONSOR 02', href: '', description: 'Temporary sponsor logo placeholder 02', style: 'serif' },
-    { name: 'Sponsor placeholder 03', logoPath: '', logoText: 'PARTNER LOGO', href: '', description: 'Temporary sponsor logo placeholder 03', style: 'compact' },
-    { name: 'Sponsor placeholder 04', logoPath: '', logoText: 'SPONSOR 04', href: '', description: 'Temporary sponsor logo placeholder 04', style: 'mono' },
-    { name: 'Sponsor placeholder 05', logoPath: '', logoText: 'YOUR LOGO', href: '', description: 'Temporary sponsor logo placeholder 05', style: 'wide' },
-    { name: 'Sponsor placeholder 06', logoPath: '', logoText: 'PARTNER 06', href: '', description: 'Temporary sponsor logo placeholder 06', style: 'serif' }
+    { name: 'Google', logoPath: 'assets/images/sponsors/google.svg', href: 'https://about.google/', description: 'Google brand logo' },
+    { name: 'Microsoft', logoPath: 'assets/images/sponsors/microsoft.svg', href: 'https://www.microsoft.com/', description: 'Microsoft brand logo' },
+    { name: 'Apple', logoPath: 'assets/images/sponsors/apple.svg', href: 'https://www.apple.com/', description: 'Apple brand logo' },
+    { name: 'Adobe', logoPath: 'assets/images/sponsors/adobe.svg', href: 'https://www.adobe.com/', description: 'Adobe brand logo' },
+    { name: 'NVIDIA', logoPath: 'assets/images/sponsors/nvidia.svg', href: 'https://www.nvidia.com/', description: 'NVIDIA brand logo' },
+    { name: 'Intel', logoPath: 'assets/images/sponsors/intel.svg', href: 'https://www.intel.com/', description: 'Intel brand logo' },
+    { name: 'Dell', logoPath: 'assets/images/sponsors/dell.svg', href: 'https://www.dell.com/', description: 'Dell brand logo' },
+    { name: 'IBM', logoPath: 'assets/images/sponsors/ibm.svg', href: 'https://www.ibm.com/', description: 'IBM brand logo' }
   ];
 })();

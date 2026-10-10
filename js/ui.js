@@ -1,14 +1,13 @@
 /* =========================================================
    ui.js — shared interface behaviour.
    Dialogs, scroll reveals, countdown, header, My Events,
-   and demo-only localStorage persistence.
+   and browser-local persistence through eventsStore.
    ========================================================= */
 (function () {
   'use strict';
 
   var App = (window.App = window.App || {});
 
-  var STORAGE_KEY = 'prism26.registrations.v1';
   var els = {};
   var revealObserver = null;
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -124,47 +123,22 @@
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
-  function wireDemoNotice() {
-    var notice = document.getElementById('hero-cookie-notice');
-    var dismiss = document.getElementById('hero-cookie-dismiss');
-    var key = 'prism26.demoNoticeDismissed.v1';
-    if (!notice || !dismiss) return;
-    try {
-      if (window.localStorage.getItem(key) === 'true') notice.hidden = true;
-    } catch (err) { /* storage may be unavailable */ }
-    dismiss.addEventListener('click', function () {
-      notice.hidden = true;
-      try { window.localStorage.setItem(key, 'true'); } catch (err) { /* optional preference */ }
-    });
-  }
-
-  /* ---------- Persistence (local demo only) ---------- */
-  function loadRegistrations() {
-    try {
-      var raw = window.localStorage.getItem(STORAGE_KEY);
-      if (!raw) return [];
-      var data = JSON.parse(raw);
-      if (!Array.isArray(data)) return [];
-      /* Validate shape before trusting stored data. */
-      return data.filter(function (r) {
-        return r && typeof r.eventId === 'string' && typeof r.name === 'string' &&
-          App.data.findEvent(r.eventId);
-      });
-    } catch (err) {
-      return [];
+  function wireThemeToggle() {
+    var button = document.getElementById('theme-toggle');
+    if (!button || !App.eventsStore) return;
+    var label = button.querySelector('span');
+    function apply(theme) {
+      var dark = theme === 'dark';
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      button.setAttribute('aria-pressed', String(dark));
+      button.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+      if (label) label.textContent = dark ? 'Light mode' : 'Dark mode';
     }
-  }
-
-  function saveRegistrations() {
-    try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(App.state.registrations));
-    } catch (err) { /* storage may be unavailable; demo only */ }
-  }
-
-  function applyRegistrationsToSeats() {
-    App.state.registrations.forEach(function (r) {
-      var event = App.state.findEvent(r.eventId);
-      if (event) event.seatsLeft = Math.max(0, event.seatsLeft - (Number(r.quantity) || 1));
+    apply(App.eventsStore.getTheme());
+    button.addEventListener('click', function () {
+      var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      App.eventsStore.setTheme(next);
+      apply(next);
     });
   }
 
@@ -206,7 +180,7 @@
   function registrationsChanged() {
     refreshBadge();
     renderMyEvents();
-    saveRegistrations();
+    App.eventsStore.setRegistrations(App.state.registrations);
   }
 
   function openMyEvents() {
@@ -240,7 +214,6 @@
   /* ---------- Init ---------- */
   function init(options) {
     els.registerDialog = options.registerDialog;
-    els.eventFlowDialog = options.eventFlowDialog;
     els.successDialog = options.successDialog;
     els.myeDialog = options.myEventsDialog;
     els.myeList = options.myeList;
@@ -250,17 +223,15 @@
     els.successEventName = options.successEventName;
     els.successEventMeta = options.successEventMeta;
 
-    [els.eventFlowDialog, els.registerDialog, els.successDialog, els.myeDialog].forEach(wireDialog);
+    [els.registerDialog, els.successDialog, els.myeDialog].forEach(wireDialog);
 
-    /* Restore demo registrations and sync seats before cards render. */
-    App.state.registrations = loadRegistrations();
-    applyRegistrationsToSeats();
+    /* Restore browser-local registrations. Stored event inventory already includes seat changes. */
     refreshBadge();
     renderMyEvents();
 
     observeReveals(document.querySelectorAll('.reveal'));
     wireHeader();
-    wireDemoNotice();
+    wireThemeToggle();
     startCountdown();
 
     els.myEventsBtn = options.myEventsBtn;
