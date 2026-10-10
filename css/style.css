@@ -1399,6 +1399,51 @@ html[data-theme="dark"] .input-wrap input { background:#171619; border-color:#51
 html[data-theme="dark"] .price-breakdown .total-line dd { color:#ff9b55; }
 html[data-theme="dark"] .events :focus-visible, html[data-theme="dark"] .theme-toggle:focus-visible { outline-color:#ff9b55; }
 
+/* Keep countdown captions readable against each hero surface. */
+html[data-theme="light"] .hero .countdown-caption,
+html[data-theme="light"] .hero .cd-label,
+html[data-theme="light"] .hero .cd-separator { color:#171717; }
+html[data-theme="dark"] .hero .countdown-caption,
+html[data-theme="dark"] .hero .cd-label,
+html[data-theme="dark"] .hero .cd-separator { color:#f7f6eb; }
+
+/* In dark mode the event route surface is dark too, so its back links stay light. */
+html[data-theme="dark"] .back-link { color:#f6f1e8; }
+html[data-theme="dark"] .back-link:hover { color:#ff9b55; }
+html[data-theme="dark"] .back-link:focus-visible { outline:2px solid #ff9b55; outline-offset:4px; border-radius:3px; }
+
+@media (max-width:560px) {
+  .my-events-btn {
+    display:grid;
+    place-items:center;
+    width:40px;
+    min-width:40px;
+    height:40px;
+    min-height:40px;
+    flex:0 0 40px;
+    padding:0;
+    border-radius:50%;
+    font-size:0;
+    line-height:0;
+  }
+  .my-events-btn svg { display:block; width:18px; height:18px; }
+  .my-events-btn .badge-dot {
+    position:absolute;
+    top:-4px;
+    right:-5px;
+    min-width:18px;
+    height:18px;
+    padding:0 4px;
+    font-size:.68rem;
+    line-height:1;
+  }
+}
+@media (max-width:380px) {
+  .header-inner { column-gap:.55rem; }
+  .header-inner > .brand { gap:.4rem; }
+  .header-inner > .brand .brand-name { font-size:1rem; }
+}
+
 /* Hero lettering: theme colors are applied directly to the rendered glyphs. */
 html[data-theme="light"] .hero-frame { background:#fff; }
 html[data-theme="light"] .hero-heading,
