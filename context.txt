@@ -1,0 +1,132 @@
+# PROJECT CONTEXT — Campus Event Hub (PRISM '26)
+Last read: build in progress. Use this file to rehydrate context quickly. Source of
+truth: problem-statement.md and whatyoumissouton.md in this folder. Do not re-read
+them fully unless details conflict.
+
+## WHAT WE ARE BUILDING
+Static campus fest browsing + registration website for the **Bit2Build** competition.
+Strictly: HTML + CSS + Vanilla JS only. NO frameworks, NO css frameworks, NO
+animation libs, NO icon libs, NO CDN js/css, NO node/npm as a project dependency.
+Must run as static site (file:// and simple http both fine). ~3 hour competition.
+Reproduce RESULTS of missing tools, not the tools themselves.
+
+## FEST IDENTITY
+- Name: **PRISM '26** (Bit2Build Campus Fest), tagline "Break into color."
+- Typographic SVG logo (diamond/bolt spark) + wordmark. Modern, colorful, campus-y.
+- Material 3 inspired: rounded surfaces (16-24px), tonal buttons, subtle motion,
+  clear states (hover/focus/active/disabled/error/success), consistent spacing.
+
+## COLOR PALETTE (CSS custom props in style.css)
+- --brand-red  #E63946  (primary actions, highlights, CTAs, accents)
+- --salmon     #E07A8D  (secondary accents, decorative)
+- --mustard    #F4A261  (badges, selected deco, warm highlights)
+- --indigo     #45497A  (dark surfaces, headings, hero/footer bg)
+- --sage       #6B7B6A  (positive/success states, selected secondary)
+- Neutrals: page bg #FBF8F4 warm off-white; dark text ~#1D2150 (indigo-tinted);
+  on surface text #F5F3FA.
+Rules: indigo for dark grounding, red dominant for primary actions, salmon/mustard
+sparingly, sage for success. No 5-color overload, few gradients.
+
+## TYPOGRAPHY (Google Fonts = permitted external fonts)
+- Headings: "Space Grotesk" (display, tight tracking)
+- Body: "Inter"
+- Loaded via <link> to Google Fonts only. No other external requests (decision:
+  no stock photos; all art is inline SVG / CSS gradients / patterns so the site
+  never shows broken images).
+
+## PAGE STRUCTURE (index.html)
+1. Skip link + <header>: PRISM wordmark logo, nav links (Events/About/Contact via
+   anchors), "+ My Events" tonal button w/ count badge, mobile-friendly wrap.
+2. <main>
+   a. HERO (dark indigo): eyebrow, big headline, sub copy, CTAs (Browse events /
+      countdown strip), right: poster-card composition w/ floating category chips,
+      stats, SVG prism art + dot grid + brand-color glows. Staggered CSS entrance.
+   b. EVENTS section (#events): eyebrow + heading, search input, category filter
+      chips (incl All), result count (aria-live), responsive grid of event cards.
+   c. (Optional, low-cost) small CTA band in indigo before footer.
+3. <footer> (indigo): brand + tagline, quick links, contact (placeholders).
+4. Dialogs at end of body: #register-dialog and #success-dialog (native <dialog>).
+
+## EVENT DATA MODEL (js/data.js — single source of truth)
+Fields: id, name, category, date (display string + ISO via property), time, venue,
+description, capacity, seatsLeft, and per-category accent (CSS classes map in JS).
+8-10 events spanning: technical, gaming, music, dance, workshop, cultural, sports.
+Include at least one FULL (seatsLeft 0) and one very low (2-3) event.
+Category meta (label, icon SVG path, gradient) driven by JS map, not hardcoded per
+card. Runtime state: copy of events; seats mutated in RAM only (update state first,
+then UI everywhere: cards, dialogs, success msg, My Events).
+Demo note: static prototype, registrations not server-side. localStorage persistence
+is explicitly "local demo only" if used.
+
+## CORE FEATURES (all required)
+3.1 Cards: name/category/date/time/venue/desc/seats + register action; hierarchy.
+3.2 Category filter + All; active chip visually identifiable; empty-state message;
+    works together with search.
+3.3 Search: case-insensitive, partial, works with filter, clearing restores.
+3.4 Registration dialog: name + email + phone; required; email regex; phone
+    sensible (flexible, allow country codes, min 7 digits); field-specific errors;
+    blocks invalid submit; focus/error states; event clearly identified; works on
+    mobile; native HTML validation + JS custom feedback.
+3.5 Success dialog: shows student name + event name + confirmation + close action;
+    styled (no native alert); keyboard + focus; fits small screens.
+3.6 Seats: shown on every card; Full state at 0; prevent registration when full;
+    decrement on success; never negative; consistent across session.
+
+## BONUSES (only AFTER core works)
+- Countdown to fest start (target ~2026-11-20), handle zero.
+- My Events dialog/sheet listing session + localStorage demo registrations.
+- Keep light: skip dark mode unless time remains.
+
+## FILE LAYOUT (classic ordered scripts, NOT ES modules, so file:// works)
+- index.html
+- css/style.css
+- js/data.js         (EVENTS data + CATEGORY meta + FEST date)
+- js/events.js       (render/filter/search)
+- js/registration.js (validation, seat rules, success)
+- js/ui.js           (dialogs, reveals-lnview observer, countdown, nav, toast)
+- js/main.js         (init bootstrap, wires everything, ordered after others)
+Global modules attached to window.App: { state, data, events, ui, registration }.
+Script load order in index.html: data, events, registration, ui, main.
+No build step. Node exists locally ONLY for `node --check` syntax verification.
+
+## ACCESSIBILITY / RESPONSIVE MANDATES
+- Skip link; semantic landmarks; aria-live result count; aria-invalid + error text
+  linked via ids; visible :focus-visible rings; native dialog focus behavior.
+- prefers-reduced-motion: disable entrance/hover animations.
+- No horizontal scroll; grid 3→2→1 cols; filters/search usable on narrow screens;
+  dialog fits mobile; touch targets >=44px; long names/venues wrap safely.
+
+## DESIGN CHOICES (so I don't re-decide)
+- No external images at all → zero broken-asset risk; art = inline SVG + gradients.
+- Card: top gradient band (category color) w/ big SVG icon + category pill overlay;
+  body: name, meta rows w/ tiny inline SVG icons, desc, seat row, full-width button.
+- Buttons: primary = filled red; secondary = tonal indigo; chips = pill outline →
+  active = filled indigo. Seat count pill: amber warm when low, sage "Full" when 0.
+- Entrance: IntersectionObserver adds .in-view (CSS handles stagger via --i index).
+- Dialog open via .showModal(); backdrop div native; close cleanly, restore focus.
+
+## BUILD STATUS — COMPLETE (base website done)
+Files: index.html, css/style.css, js/{data,events,registration,ui,main}.js,
+assets/images/favicon.svg, context.txt. All scripts classic + ordered (file:// safe).
+
+VERIFICATION DONE (headless Edge, old headless via cmd redirect of --dump-dom):
+- 9 event cards render, 8 filter chips (All + 7), countdown live (41 days at build).
+- Full event shows Sold-out ribbon + Full pill; register button disabled.
+- 29/29 automated functional assertions PASS: category filter, search, combined
+  filter+search, case-insensitive, clear-restores, empty-state, all 3 field
+  validators, invalid submit does NOT decrement, valid submit decrements + records
+  + success dialog with name+event, card pill update, badge update, full prevention,
+  last-seat -> 0, card flips is-full, seats never negative, My Events list.
+- No horizontal overflow at 496 / 742 / 998 / 1414 px widths.
+- Bug found & FIXED: registration fields array used keys regName/regEmail/regPhone
+  while init assigned els.name/email/phone -> resetField crashed. Fixed to name/email/phone.
+- Refinement: search re-renders instantly (animate:false, no .reveal) to avoid
+  flicker; category changes keep staggered entrance.
+
+REMAINING (optional / nice-to-have only): dark mode (skipped); no other blockers.
+Do NOT reintroduce prohibited deps. Re-run `node --check js/*.js` after any JS edit.
+
+Reminder on verification method: Edge headless --dump-dom emits to stdout; capture
+via cmd.exe `>` redirect (PowerShell `>` gave 0 bytes). Screenshots work but the
+model cannot view images. Functional checks were done by injecting a temp test
+script that writes results into a <pre id="testout">, then scraping the dumped DOM.

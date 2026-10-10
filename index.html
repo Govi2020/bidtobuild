@@ -1,0 +1,382 @@
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PRISM '26 — the campus festival of technology, culture and everything in between. Browse events, compare seats and register in seconds.">
+  <title>PRISM '26 · Campus Event Hub</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400..900;1,800..900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#events">Skip to events</a>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="PRISM 26 home">
+        <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+          <polygon points="20,4 32,28 26,10 33,32 20,36 7,32 14,10 8,28" fill="currentColor"/>
+          <circle cx="33" cy="8" r="2.6" fill="#F4A261"/>
+          <circle cx="6" cy="6" r="1.8" fill="#E63946"/>
+        </svg>
+        <span class="brand-name">PRISM<sup>&rsquo;26</sup></span>
+      </a>
+
+      <nav class="site-nav" aria-label="Primary">
+        <a href="#top">Home</a>
+        <a href="#events">Events</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#about">About</a>
+        <a href="#sponsors">Sponsors</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark mode">
+        <svg class="theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 15.2A8.4 8.4 0 0 1 8.8 3.8 8.5 8.5 0 1 0 20.2 15.2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        <svg class="theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span>Dark mode</span>
+      </button>
+
+      <button class="btn btn-tonal btn-sm my-events-btn" id="my-events-btn" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6l7-3z" fill="currentColor" opacity=".9"/></svg>
+        My Events <span class="badge-dot" id="my-events-count" hidden>0</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero">
+      <div class="hero-frame">
+        <div class="container hero-inner">
+          <div class="hero-copy">
+            <h1 class="hero-heading" aria-label="PRISM '26">
+              <span class="hero-title-line">PRISM</span>
+              <span class="hero-title-line hero-title-line--second">’26!!!</span>
+            </h1>
+
+            <div class="countdown" aria-label="Time until the fest begins">
+              <p class="countdown-caption">PRISM begins November 20</p>
+              <div class="countdown-grid">
+                <div class="cd-cell"><span class="cd-num" id="cd-days">--</span><span class="cd-label">days</span></div>
+                <span class="cd-separator" aria-hidden="true">:</span>
+                <div class="cd-cell"><span class="cd-num" id="cd-hours">--</span><span class="cd-label">hours</span></div>
+                <span class="cd-separator" aria-hidden="true">:</span>
+                <div class="cd-cell"><span class="cd-num" id="cd-mins">--</span><span class="cd-label">mins</span></div>
+                <span class="cd-separator" aria-hidden="true">:</span>
+                <div class="cd-cell"><span class="cd-num" id="cd-secs">--</span><span class="cd-label">secs</span></div>
+              </div>
+            </div>
+
+            <div class="hero-actions">
+              <a class="btn btn-primary btn-lg hero-register" href="#events">REGISTER FOR AN EVENT <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
+          </div>
+          <div class="hero-sticker" aria-label="LBS College of Engineering">
+            <span>LBS</span><strong>COLLEGE OF</strong><b>ENGINEERING</b>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- ============ PRISM GALLERY ============ -->
+    <section class="moments" id="gallery" aria-labelledby="moments-title">
+      <div class="moments-heading container">
+        <div>
+          <p class="eyebrow">Postcards from PRISM</p>
+          <h2 class="moments-title" id="moments-title">Fest of all families</h2>
+        </div>
+        <div class="moments-note-wrap">
+          <p class="moments-note">A few moments from the worlds we make together.</p>
+          <button class="gallery-toggle" id="gallery-toggle" type="button" aria-pressed="false" aria-label="Pause gallery animation">Pause gallery</button>
+        </div>
+      </div>
+      <div class="gallery-window" role="region" aria-label="Scrolling gallery of festival moments">
+        <div class="gallery-track" id="gallery-track"></div>
+      </div>
+      <p class="gallery-caption" aria-hidden="true">Scrolls on repeat <span>✳</span> PRISM ’26</p>
+    </section>
+
+    <!-- ============ EVENTS ============ -->
+    <section class="events" id="events">
+      <div class="events-list-view" id="events-list-view">
+        <div class="container">
+          <div class="events-head reveal">
+            <div class="events-heading-copy">
+              <h2 class="section-title">Find your<br>next evening</h2>
+              <p class="event-tagline">Curated cultural events that inspire after dark.</p>
+            </div>
+            <div class="search-box" role="search">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              <label class="sr-only" for="search">Search events by name, category, date or venue</label>
+              <input id="search" type="search" placeholder="Search events" autocomplete="off">
+              <button class="search-clear" id="search-clear" type="button" aria-label="Clear event search" hidden>&times;</button>
+            </div>
+          </div>
+
+          <div class="events-tools">
+            <div class="filter-bar" id="filter-bar" role="group" aria-label="Filter events by category"></div>
+            <button class="filter-toggle" id="filters-toggle" type="button" aria-expanded="false" aria-controls="filter-options">☷ <span>Filters</span></button>
+          </div>
+          <div class="filter-options" id="filter-options" hidden>
+            <label for="event-sort">Sort by</label>
+            <select id="event-sort"><option value="date">Date</option><option value="name">Name</option><option value="price">Price</option></select>
+            <label class="available-filter"><input id="available-only" type="checkbox"> Available only</label>
+          </div>
+
+          <div class="category-marquee" aria-hidden="true"><div class="category-marquee-track" id="category-marquee-track"></div></div>
+          <p class="results-count" id="results-count" aria-live="polite"></p>
+          <p class="events-loading" id="events-loading" role="status">Loading events…</p>
+
+          <div id="curated-results">
+            <div class="events-subhead"><h3>This week</h3><button class="text-link" id="view-all" type="button">View all <span aria-hidden="true">→</span></button></div>
+            <div class="events-grid events-grid-featured" id="events-grid"></div>
+            <div class="events-subhead more-heading"><h3>More to explore</h3></div>
+            <div class="more-events-grid" id="more-events-grid"></div>
+          </div>
+          <div class="events-grid events-grid-all" id="events-grid-all" hidden></div>
+
+          <div class="empty-state" id="empty-state" hidden>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-3.5-3.5M8.5 11h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <h3>Nothing matches that</h3>
+            <p>No events match your search and filters. Try another keyword or category.</p>
+            <button class="btn btn-primary" type="button" id="empty-reset">Reset filters</button>
+          </div>
+        </div>
+      </div>
+
+      <section class="event-route-view" id="event-detail-view" aria-labelledby="event-detail-title" hidden>
+        <div class="container event-detail-container">
+          <div class="route-toolbar">
+            <a class="back-link" href="#events">← <span>Back to events</span></a>
+            <div class="route-actions"><button class="icon-action" id="detail-save" type="button" aria-label="Save event" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.8c0 5.2-8.8 11-8.8 11S3.2 14 3.2 8.8A4.4 4.4 0 0 1 12 7.4a4.4 4.4 0 0 1 8.8 1.4Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button><button class="icon-action" id="detail-share" type="button" aria-label="Share event"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="6" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="18" cy="19" r="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m8.7 10.7 6.6-4.2M8.7 13.3l6.6 4.2" stroke="currentColor" stroke-width="1.7"/></svg></button><span class="sr-only" id="share-status" aria-live="polite"></span></div>
+          </div>
+          <img class="event-hero-image" id="event-detail-image" src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1100&q=82" alt="">
+          <div class="event-detail-content">
+            <p class="event-detail-category" id="event-detail-category"></p>
+            <h2 class="event-detail-title" id="event-detail-title"></h2>
+            <ul class="event-facts" id="event-detail-facts"></ul>
+            <p class="event-detail-address" id="event-detail-address"></p>
+            <p class="event-detail-description" id="event-detail-description"></p>
+            <div class="event-schedule-wrap"><h3>Schedule</h3><ol class="event-schedule" id="event-schedule"></ol></div>
+            <button class="btn btn-primary event-choose" id="choose-tickets" type="button">Choose tickets <span aria-hidden="true">→</span></button>
+            <p class="capacity-notice">ⓘ <span>Limited capacity event. Early booking recommended.</span></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="event-route-view" id="ticket-review-view" aria-labelledby="review-title" hidden>
+        <div class="container review-container">
+          <div class="route-toolbar"><a class="back-link" id="back-to-event" href="#events">← <span>Back to event</span></a></div>
+          <h2 class="review-title" id="review-title">Review tickets</h2>
+          <div class="review-event-summary"><img id="review-image" src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1100&q=82" alt=""><div><h3 id="review-event-name"></h3><p id="review-event-date"></p><p id="review-event-time"></p><p id="review-event-venue"></p><p id="review-event-address"></p></div></div>
+          <div class="review-selection"><h3>Your selection</h3><div class="ticket-option"><div><strong>General admission</strong><span>Standing entry</span></div><label class="sr-only" for="quantity-select">Ticket quantity</label><select id="quantity-select"></select><div class="unit-price"><strong id="ticket-unit-price">HKD 180</strong><span>per ticket</span></div></div></div>
+          <dl class="price-breakdown"><div><dt>Subtotal</dt><dd id="ticket-subtotal">HKD 180</dd></div><div><dt>Booking fee <span aria-label="No booking fee">ⓘ</span></dt><dd>HKD 0</dd></div><div class="total-line"><dt>Total</dt><dd id="ticket-total">HKD 180</dd></div></dl>
+          <p class="demo-ticket-note">ⓘ <span>Demo selection. No tickets issued.</span></p>
+          <button class="btn btn-primary checkout-button" id="checkout-open" type="button">Continue to checkout <span aria-hidden="true">→</span></button>
+          <p class="secure-checkout">♙ <span>Secure checkout</span></p>
+        </div>
+      </section>
+    </section>
+
+
+    <!-- ============ SPONSORS ============ -->
+    <section class="sponsors" id="sponsors" aria-labelledby="sponsors-title">
+      <div class="container sponsors-inner">
+        <div class="sponsors-heading-wrap reveal">
+          <h2 class="sponsors-title" id="sponsors-title">Our Sponsors</h2>
+          <div class="sponsors-sticker" aria-hidden="true">
+            <span>PRISM ’26</span>
+            <strong>PARTNERS</strong>
+          </div>
+        </div>
+        <p class="sponsor-disclaimer">Illustrative technology brands. These companies are not confirmed PRISM sponsors.</p>
+        <div class="sponsors-marquee" role="region" aria-label="Festival sponsors">
+          <div class="sponsors-track" id="sponsors-track"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CTA BAND ============ -->
+    <section class="cta-band" aria-label="Register now">
+      <div class="container cta-inner reveal">
+        <div>
+          <p class="eyebrow eyebrow-light">Don&rsquo;t refresh your luck</p>
+          <h2 class="cta-title">Your seat won&rsquo;t wait for you.</h2>
+        </div>
+        <a class="btn btn-warm btn-lg" href="#events">Grab a seat &rarr;</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer" id="contact">
+    <div class="container footer-grid reveal">
+      <div class="footer-brand">
+        <a class="brand" href="#top" aria-label="PRISM 26 home">
+          <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+            <polygon points="20,4 32,28 26,10 33,32 20,36 7,32 14,10 8,28" fill="currentColor"/>
+            <circle cx="33" cy="8" r="2.6" fill="#F4A261"/>
+            <circle cx="6" cy="6" r="1.8" fill="#E63946"/>
+          </svg>
+          <span class="brand-name">PRISM<sup>&rsquo;26</sup></span>
+        </a>
+        <p class="footer-tag">Break into color. The campus festival where technology, art and energy collide.</p>
+      </div>
+
+      <nav class="footer-col" aria-label="Footer navigation">
+        <h4>Explore</h4>
+        <a href="#top">Home</a>
+        <a href="#events">Events</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#about">About</a>
+        <a href="#sponsors">Sponsors</a>
+        <button type="button" class="footer-link" id="footer-my-events">My Events</button>
+      </nav>
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <span class="footer-static">Contact details will be announced by the fest organizers.</span>
+      </div>
+
+    </div>
+    <div class="container footer-bottom reveal">
+      <span>&copy; 2026 PRISM &rsquo;26 · Campus Event Hub</span>
+      <span>Built with plain HTML, CSS &amp; JavaScript</span>
+    </div>
+  </footer>
+
+  <!-- ============ REGISTRATION DIALOG ============ -->
+  <dialog class="modal" id="register-dialog" aria-labelledby="reg-title">
+    <div class="modal-inner">
+      <button class="modal-close" type="button" data-close-dialog aria-label="Close registration">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+
+      <p class="eyebrow" id="reg-eyebrow">Your details</p>
+      <h2 class="modal-title" id="reg-title">Register for the event</h2>
+
+      <div class="reg-event" id="reg-event-summary">
+        <div class="reg-event-badge" id="reg-event-icon" aria-hidden="true"></div>
+        <div>
+          <p class="reg-event-name" id="reg-event-name">Event name</p>
+          <p class="reg-event-meta" id="reg-event-meta"></p>
+        </div>
+      </div>
+
+      <form id="reg-form" novalidate>
+        <div class="field" id="field-name">
+          <label for="reg-name">Full name</label>
+          <div class="input-wrap">
+            <input id="reg-name" name="name" type="text" placeholder="e.g. Aarav Kapoor" autocomplete="name" aria-describedby="err-name">
+          </div>
+          <p class="field-error" id="err-name" role="alert"></p>
+        </div>
+
+        <div class="field" id="field-email">
+          <label for="reg-email">Email address</label>
+          <div class="input-wrap">
+            <input id="reg-email" name="email" type="email" placeholder="you@campus.in" autocomplete="email" aria-describedby="err-email">
+          </div>
+          <p class="field-error" id="err-email" role="alert"></p>
+        </div>
+
+        <div class="field" id="field-phone">
+          <label for="reg-phone">Phone number</label>
+          <div class="input-wrap">
+            <input id="reg-phone" name="phone" type="tel" inputmode="tel" placeholder="+91 98765 43210" autocomplete="tel" aria-describedby="err-phone">
+          </div>
+          <p class="field-error" id="err-phone" role="alert"></p>
+        </div>
+
+        <p class="reg-seats-note" id="reg-seats-note" aria-live="polite"></p>
+
+        <div class="modal-actions">
+          <button class="btn btn-ghost-dark" type="button" data-close-dialog>Back to review</button>
+          <button class="btn btn-primary" type="submit" id="reg-submit">Confirm registration</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- ============ SUCCESS DIALOG ============ -->
+  <dialog class="modal modal-success" id="success-dialog" aria-labelledby="success-title">
+    <div class="modal-inner">
+      <div class="success-art" aria-hidden="true">
+        <svg class="success-check" viewBox="0 0 80 80">
+          <circle class="sc-ring" cx="40" cy="40" r="34"/>
+          <polyline class="sc-tick" points="22,41 35,53 58,29"/>
+        </svg>
+      </div>
+      <p class="eyebrow">You&rsquo;re in</p>
+      <h2 class="modal-title" id="success-title">Seat confirmed!</h2>
+      <p class="success-msg" id="success-msg"></p>
+      <div class="success-card" id="success-card" hidden>
+        <p class="success-card-label">Registered for</p>
+        <p class="success-card-name" id="success-event-name"></p>
+        <p class="success-card-meta" id="success-event-meta"></p>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost-dark" type="button" data-close-dialog>Back to events</button>
+        <button class="btn btn-tonal" type="button" id="success-my-events">View My Events</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ============ MY EVENTS DIALOG ============ -->
+  <dialog class="modal modal-mye" id="my-events-dialog" aria-labelledby="mye-title">
+    <div class="modal-inner">
+      <button class="modal-close" type="button" data-close-dialog aria-label="Close my events">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <p class="eyebrow">Your queue</p>
+      <h2 class="modal-title" id="mye-title">My Events</h2>
+      <p class="mye-sub">Registrations stored for this demo on this device.</p>
+      <div class="mye-list" id="mye-list"></div>
+    </div>
+  </dialog>
+
+  <!-- ============ SCRIPTS (classic, ordered — no build step) ============ -->
+  <script src="js/data.js"></script>
+  <script src="js/events-store.js"></script>
+  <script src="js/events.js"></script>
+  <script src="js/registration.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/sponsors-data.js"></script>
+  <script src="js/sponsors.js"></script>
+  <script src="js/gallery.js"></script>
+</body>
+</html>
