@@ -11,8 +11,8 @@
   var FEST = {
     name: "PRISM '26",
     tagline: 'Break into color.',
-    startsAt: '2026-11-20T10:00:00',
-    endsAt: '2026-11-22T22:00:00',
+    startsAt: '2026-11-20T10:00:00+05:30',
+    endsAt: '2026-11-22T22:00:00+05:30',
     venue: 'Main Campus, Blocks A-C'
   };
 

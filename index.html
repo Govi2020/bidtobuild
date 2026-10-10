@@ -8,7 +8,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400..900;1,800..900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -30,7 +30,9 @@
       <nav class="site-nav" aria-label="Primary">
         <a href="#top">Home</a>
         <a href="#events">Events</a>
+        <a href="#gallery">Gallery</a>
         <a href="#about">About</a>
+        <a href="#sponsors">Sponsors</a>
         <a href="#contact">Contact</a>
       </nav>
 
@@ -44,75 +46,39 @@
   <main id="top">
     <!-- ============ HERO ============ -->
     <section class="hero" id="hero">
-      <div class="container hero-inner">
-        <div class="hero-copy reveal" style="--d:0">
-          <p class="eyebrow">Bit2Build · Campus Fest 2026</p>
-          <h1 class="hero-title">
-            <span class="t-stroke">Break</span> into
-            <span class="t-gradient">color.</span>
-          </h1>
-          <p class="hero-sub">
-            Three days across seven tracks. Explore coding challenges, live music,
-            gaming, dance, workshops, cultural events and sports — then reserve a seat.
-          </p>
+      <div class="hero-frame">
+        <div class="container hero-inner">
+          <div class="hero-copy">
+            <h1 class="hero-heading" aria-label="DESIGN BOMB!!!">
+              <span class="hero-title-line" data-text="DESIGN">DESIGN</span>
+              <span class="hero-title-line hero-title-line--second" data-text="BOMB!!!">BOMB!!!</span>
+            </h1>
 
-          <div class="hero-actions">
-            <a class="btn btn-primary btn-lg" href="#events">
-              Browse events
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-            <a class="btn btn-ghost btn-lg" href="#about">Fest at a glance</a>
-          </div>
+            <div class="countdown" aria-label="Time until the fest begins">
+              <p class="countdown-caption">PRISM begins November 20</p>
+              <div class="countdown-grid">
+                <div class="cd-cell"><span class="cd-num" id="cd-days">--</span><span class="cd-label">days</span></div>
+                <span class="cd-separator" aria-hidden="true">:</span>
+                <div class="cd-cell"><span class="cd-num" id="cd-hours">--</span><span class="cd-label">hours</span></div>
+                <span class="cd-separator" aria-hidden="true">:</span>
+                <div class="cd-cell"><span class="cd-num" id="cd-mins">--</span><span class="cd-label">mins</span></div>
+                <span class="cd-separator" aria-hidden="true">:</span>
+                <div class="cd-cell"><span class="cd-num" id="cd-secs">--</span><span class="cd-label">secs</span></div>
+              </div>
+            </div>
 
-          <div class="countdown" aria-label="Time until the fest begins">
-            <p class="countdown-caption">Fest starts November 20</p>
-            <div class="countdown-grid">
-              <div class="cd-cell"><span class="cd-num" id="cd-days">--</span><span class="cd-label">days</span></div>
-              <div class="cd-cell"><span class="cd-num" id="cd-hours">--</span><span class="cd-label">hrs</span></div>
-              <div class="cd-cell"><span class="cd-num" id="cd-mins">--</span><span class="cd-label">min</span></div>
-              <div class="cd-cell"><span class="cd-num" id="cd-secs">--</span><span class="cd-label">sec</span></div>
+            <div class="hero-actions">
+              <a class="btn btn-primary btn-lg hero-register" href="#events">REGISTER FOR AN EVENT <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
             </div>
           </div>
-        </div>
-
-        <div class="hero-art reveal" aria-hidden="true" style="--d:1">
-          <div class="poster-card">
-            <div class="poster-top">
-              <span class="poster-chip">PRISM&rsquo;26</span>
-              <span class="poster-chip poster-chip-warm">NOV 20–22</span>
-            </div>
-
-            <svg class="poster-prism" viewBox="0 0 220 220">
-              <defs>
-                <linearGradient id="pg-a" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stop-color="#E63946"/>
-                  <stop offset="1" stop-color="#E07A8D"/>
-                </linearGradient>
-                <linearGradient id="pg-b" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stop-color="#F4A261"/>
-                  <stop offset="1" stop-color="#E63946"/>
-                </linearGradient>
-                <linearGradient id="pg-c" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stop-color="#45497A"/>
-                  <stop offset="1" stop-color="#6B7B6A"/>
-                </linearGradient>
-              </defs>
-              <polygon points="110,18 172,152 48,152" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="2"/>
-              <polygon points="110,40 158,138 62,138" fill="url(#pg-a)"/>
-              <polygon points="110,58 142,122 78,122" fill="url(#pg-b)"/>
-              <polygon points="110,80 126,102 94,102" fill="url(#pg-c)"/>
-              <circle cx="182" cy="34" r="9" fill="#fff" opacity=".9"/>
-              <circle cx="200" cy="56" r="4.5" fill="#fff" opacity=".55"/>
-              <circle cx="168" cy="14" r="3.5" fill="#fff" opacity=".4"/>
-            </svg>
-
-            <div class="poster-stats">
-              <div class="poster-stat"><strong>9</strong><span>listed events</span></div>
-              <div class="poster-stat"><strong>7</strong><span>event tracks</span></div>
-              <div class="poster-stat"><strong>3</strong><span>fest days</span></div>
-            </div>
+          <div class="hero-sticker" aria-hidden="true">
+            <span class="sticker-days">20—22</span><span class="sticker-month">NOVEMBER</span><strong>PRISM</strong><strong class="sticker-year">’26</strong>
           </div>
         </div>
+        <aside class="hero-cookie-notice" id="hero-cookie-notice" aria-label="Demo storage notice">
+          <p>This demo saves your registrations in this browser.</p>
+          <button type="button" id="hero-cookie-dismiss">Okay</button>
+        </aside>
       </div>
     </section>
 
@@ -142,10 +108,12 @@
             <p class="eyebrow">This season at PRISM</p>
             <h2 class="section-title">Find your event</h2>
           </div>
-          <label class="search-box" for="search">
+          <div class="search-box" role="search">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <label class="sr-only" for="search">Search events by name, category, date or venue</label>
             <input id="search" type="search" placeholder="Search events, e.g. HackSphere" autocomplete="off">
-          </label>
+            <button class="search-clear" id="search-clear" type="button" aria-label="Clear event search" hidden>&times;</button>
+          </div>
         </div>
 
         <div class="filter-bar reveal" id="filter-bar" role="group" aria-label="Filter events by category">
@@ -165,6 +133,40 @@
       </div>
     </section>
 
+    <!-- ============ PRISM GALLERY ============ -->
+    <section class="moments" id="gallery" aria-labelledby="moments-title">
+      <div class="moments-heading container">
+        <div>
+          <p class="eyebrow">Postcards from PRISM</p>
+          <h2 class="moments-title" id="moments-title">The fest, in motion.</h2>
+        </div>
+        <div class="moments-note-wrap">
+          <p class="moments-note">A few moments from the worlds we make together.</p>
+          <button class="gallery-toggle" id="gallery-toggle" type="button" aria-pressed="false" aria-label="Pause gallery animation">Pause gallery</button>
+        </div>
+      </div>
+      <div class="gallery-window" role="region" aria-label="Scrolling gallery of festival moments">
+        <div class="gallery-track" id="gallery-track"></div>
+      </div>
+      <p class="gallery-caption" aria-hidden="true">Scrolls on repeat <span>✳</span> PRISM ’26</p>
+    </section>
+
+    <!-- ============ SPONSORS ============ -->
+    <section class="sponsors" id="sponsors" aria-labelledby="sponsors-title">
+      <div class="container sponsors-inner">
+        <div class="sponsors-heading-wrap reveal">
+          <h2 class="sponsors-title" id="sponsors-title">Our Sponsors</h2>
+          <div class="sponsors-sticker" aria-hidden="true">
+            <span>PRISM ’26</span>
+            <strong>PARTNERS</strong>
+          </div>
+        </div>
+        <div class="sponsors-marquee" role="region" aria-label="Festival sponsors">
+          <div class="sponsors-track" id="sponsors-track"></div>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ CTA BAND ============ -->
     <section class="cta-band" aria-label="Register now">
       <div class="container cta-inner reveal">
@@ -179,7 +181,7 @@
 
   <!-- ============ FOOTER ============ -->
   <footer class="site-footer" id="contact">
-    <div class="container footer-grid">
+    <div class="container footer-grid reveal">
       <div class="footer-brand">
         <a class="brand" href="#top" aria-label="PRISM 26 home">
           <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
@@ -196,7 +198,9 @@
         <h4>Explore</h4>
         <a href="#top">Home</a>
         <a href="#events">Events</a>
+        <a href="#gallery">Gallery</a>
         <a href="#about">About</a>
+        <a href="#sponsors">Sponsors</a>
         <button type="button" class="footer-link" id="footer-my-events">My Events</button>
       </nav>
 
@@ -206,11 +210,64 @@
       </div>
 
     </div>
-    <div class="container footer-bottom">
+    <div class="container footer-bottom reveal">
       <span>&copy; 2026 PRISM &rsquo;26 · Campus Event Hub</span>
       <span>Built with plain HTML, CSS &amp; JavaScript</span>
     </div>
   </footer>
+
+  <!-- ============ EVENT DETAILS AND TICKET REVIEW ============ -->
+  <dialog class="modal event-flow-dialog" id="event-flow-dialog" aria-labelledby="flow-title">
+    <div class="modal-inner event-flow-inner">
+      <button class="modal-close" type="button" data-close-dialog aria-label="Close event details">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <ol class="flow-progress" aria-label="Registration steps">
+        <li class="is-current" data-flow-step="event"><span>01</span> Event</li>
+        <li data-flow-step="tickets"><span>02</span> Tickets</li>
+        <li data-flow-step="details"><span>03</span> Details</li>
+      </ol>
+
+      <section class="flow-panel" id="event-detail-step" aria-labelledby="flow-title">
+        <div class="event-detail-art" id="event-detail-art" aria-hidden="true"></div>
+        <p class="eyebrow flow-category" id="flow-category"></p>
+        <h2 class="modal-title" id="flow-title"></h2>
+        <ul class="detail-meta" id="detail-meta"></ul>
+        <p class="event-detail-description" id="event-detail-description"></p>
+        <div class="detail-capacity" id="detail-capacity"></div>
+        <div class="modal-actions">
+          <button class="btn btn-ghost-dark" type="button" data-close-dialog>Back to events</button>
+          <button class="btn btn-primary flow-primary" type="button" id="choose-tickets">Choose tickets <span aria-hidden="true">→</span></button>
+        </div>
+      </section>
+
+      <section class="flow-panel" id="ticket-review-step" aria-labelledby="ticket-review-title" hidden>
+        <p class="eyebrow">Step 2 · Review your selection</p>
+        <h2 class="modal-title" id="ticket-review-title">Reserve your spot</h2>
+        <div class="ticket-summary">
+          <div class="ticket-summary-icon" id="ticket-summary-icon" aria-hidden="true"></div>
+          <div><strong id="ticket-summary-name"></strong><span id="ticket-summary-meta"></span></div>
+        </div>
+        <div class="ticket-quantity-row">
+          <div><strong>Festival admission</strong><span class="ticket-type-note">Complimentary · no payment collected</span></div>
+          <div class="quantity-control" aria-label="Number of registrations">
+            <button type="button" id="quantity-decrease" aria-label="Remove one attendee">−</button>
+            <output id="ticket-quantity" aria-live="polite">1</output>
+            <button type="button" id="quantity-increase" aria-label="Add one attendee">+</button>
+          </div>
+        </div>
+        <dl class="ticket-total">
+          <div><dt>Seats reserved</dt><dd id="ticket-seat-total">1</dd></div>
+          <div class="ticket-total-final"><dt>Total</dt><dd>FREE</dd></div>
+        </dl>
+        <p class="ticket-demo-note">Demo registration only. No ticket or payment is issued.</p>
+        <div class="modal-actions">
+          <button class="btn btn-ghost-dark" type="button" id="back-to-event">Back to event</button>
+          <button class="btn btn-primary flow-primary" type="button" id="continue-to-details">Continue <span aria-hidden="true">→</span></button>
+        </div>
+      </section>
+    </div>
+  </dialog>
 
   <!-- ============ REGISTRATION DIALOG ============ -->
   <dialog class="modal" id="register-dialog" aria-labelledby="reg-title">
@@ -219,7 +276,12 @@
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       </button>
 
-      <p class="eyebrow" id="reg-eyebrow">Reserve your seat</p>
+      <ol class="flow-progress flow-progress--details" aria-label="Registration steps">
+        <li data-flow-step="event"><span>01</span> Event</li>
+        <li data-flow-step="tickets"><span>02</span> Tickets</li>
+        <li class="is-current" data-flow-step="details"><span>03</span> Details</li>
+      </ol>
+      <p class="eyebrow" id="reg-eyebrow">Step 3 · Your details</p>
       <h2 class="modal-title" id="reg-title">Register for the event</h2>
 
       <div class="reg-event" id="reg-event-summary">
@@ -258,7 +320,7 @@
         <p class="reg-seats-note" id="reg-seats-note" aria-live="polite"></p>
 
         <div class="modal-actions">
-          <button class="btn btn-ghost-dark" type="button" data-close-dialog>Cancel</button>
+          <button class="btn btn-ghost-dark" type="button" id="reg-back-to-tickets">Back to tickets</button>
           <button class="btn btn-primary" type="submit" id="reg-submit">Confirm registration</button>
         </div>
       </form>
@@ -308,5 +370,8 @@
   <script src="js/registration.js"></script>
   <script src="js/ui.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/sponsors-data.js"></script>
+  <script src="js/sponsors.js"></script>
+  <script src="js/gallery.js"></script>
 </body>
 </html>

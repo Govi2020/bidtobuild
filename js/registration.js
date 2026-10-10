@@ -9,6 +9,7 @@
 
   var els = {};
   var currentEventId = null;
+  var currentQuantity = 1;
 
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   var NAME_RE = /^[A-Za-z][A-Za-z\s.'-]{1,}$/;
@@ -93,10 +94,32 @@
     fields.forEach(resetField);
   }
 
-  function open(eventId) {
+  function setFlowStep(step) {
+    Array.prototype.forEach.call(document.querySelectorAll('[data-flow-step]'), function (item) {
+      var current = item.dataset.flowStep === step;
+      item.classList.toggle('is-current', current);
+      item.classList.toggle('is-complete', item.dataset.flowStep === 'event' && step !== 'event' || item.dataset.flowStep === 'tickets' && step === 'details');
+      if (current) item.setAttribute('aria-current', 'step');
+      else item.removeAttribute('aria-current');
+    });
+  }
+
+  function updateQuantity() {
+    var event = App.state.findEvent(currentEventId);
+    if (!event) return;
+    var max = Math.max(1, event.seatsLeft);
+    currentQuantity = Math.max(1, Math.min(currentQuantity, max));
+    els.quantity.textContent = currentQuantity;
+    els.seatTotal.textContent = currentQuantity;
+    els.quantityDecrease.disabled = currentQuantity <= 1;
+    els.quantityIncrease.disabled = currentQuantity >= max;
+  }
+
+  function showEventDetails(eventId) {
     var event = App.state.findEvent(eventId);
     if (!event) return;
     currentEventId = eventId;
+    currentQuantity = 1;
 
     var cat = App.data.getCategory(event.category);
     els.eventIcon.style.setProperty('--c1', cat.c1);
@@ -105,17 +128,74 @@
     els.eventName.textContent = event.name;
     els.eventMeta.textContent = event.date + ' \u00b7 ' + event.time + ' \u00b7 ' + event.venue;
 
+    els.flowCategory.textContent = cat.label;
+    els.flowArt.style.setProperty('--c1', cat.c1);
+    els.flowArt.style.setProperty('--c2', cat.c2);
+    els.flowArt.innerHTML = cat.icon;
+    els.flowTitle.textContent = event.name;
+    els.flowDescription.textContent = event.description;
+    els.flowMeta.innerHTML = '<li><span>Date</span><strong>' + escapeHtml(event.date) + '</strong></li>' +
+      '<li><span>Time</span><strong>' + escapeHtml(event.time) + '</strong></li>' +
+      '<li><span>Location</span><strong>' + escapeHtml(event.venue) + '</strong></li>';
+    els.detailCapacity.textContent = event.seatsLeft > 0 ? event.seatsLeft + (event.seatsLeft === 1 ? ' seat remaining' : ' seats remaining') : 'This event is full';
+    els.chooseTickets.disabled = event.seatsLeft <= 0;
+    els.chooseTickets.textContent = event.seatsLeft <= 0 ? 'Event full' : 'Choose tickets →';
+    els.detailStep.hidden = false;
+    els.ticketStep.hidden = true;
+    setFlowStep('event');
+    App.ui.openDialog(els.flowDialog);
+  }
+
+  function showTicketReview() {
+    var event = App.state.findEvent(currentEventId);
+    if (!event) return;
+    if (event.seatsLeft <= 0) {
+      els.detailCapacity.textContent = 'This event is full';
+      return;
+    }
+    var cat = App.data.getCategory(event.category);
+    els.ticketIcon.style.setProperty('--c1', cat.c1);
+    els.ticketIcon.style.setProperty('--c2', cat.c2);
+    els.ticketIcon.innerHTML = cat.icon;
+    els.ticketName.textContent = event.name;
+    els.ticketMeta.textContent = event.date + ' · ' + event.time;
+    els.detailStep.hidden = true;
+    els.ticketStep.hidden = false;
+    setFlowStep('tickets');
+    updateQuantity();
+    els.backToEvent.focus();
+  }
+
+  function openRegistration() {
+    var event = App.state.findEvent(currentEventId);
+    if (!event) return;
+
     if (event.seatsLeft <= 0) {
       els.seatsNote.textContent = 'This event is full. You cannot register right now.';
       els.submit.disabled = true;
     } else {
-      els.seatsNote.textContent = event.seatsLeft + ' of ' + event.capacity + ' seats remaining. Reserve yours now.';
+      els.seatsNote.textContent = currentQuantity + (currentQuantity === 1 ? ' attendee' : ' attendees') + ' · ' + event.seatsLeft + ' seats currently available.';
       els.submit.disabled = false;
     }
 
     resetForm();
-    App.ui.openDialog(els.dialog);
-    window.setTimeout(function () { els.name.focus(); }, 60);
+    setFlowStep('details');
+    App.ui.closeDialog(els.flowDialog);
+    window.setTimeout(function () {
+      App.ui.openDialog(els.dialog);
+      window.setTimeout(function () { els.name.focus(); }, 60);
+    }, window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 230);
+  }
+
+  function backToTickets() {
+    App.ui.closeDialog(els.dialog);
+    window.setTimeout(function () {
+      els.detailStep.hidden = true;
+      els.ticketStep.hidden = false;
+      setFlowStep('tickets');
+      updateQuantity();
+      App.ui.openDialog(els.flowDialog);
+    }, window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 230);
   }
 
   function handleSubmit(e) {
@@ -123,8 +203,8 @@
     var event = App.state.findEvent(currentEventId);
     if (!event) return;
 
-    if (event.seatsLeft <= 0) {
-      els.seatsNote.textContent = 'Sorry — the last seat just went. This event is full.';
+    if (event.seatsLeft < currentQuantity) {
+      els.seatsNote.textContent = event.seatsLeft <= 0 ? 'Sorry — this event just filled up.' : 'Only ' + event.seatsLeft + ' seats remain. Go back and update your selection.';
       els.submit.disabled = true;
       App.events.refreshCard(event.id, true);
       return;
@@ -141,12 +221,13 @@
     var phone = els.phone.value.trim();
 
     /* Mutate state first, then sync every dependent surface. */
-    event.seatsLeft = Math.max(0, event.seatsLeft - 1);
+    event.seatsLeft = Math.max(0, event.seatsLeft - currentQuantity);
     var registration = {
       eventId: event.id,
       name: name,
       email: email,
       phone: phone,
+      quantity: currentQuantity,
       at: Date.now()
     };
     App.state.registrations.push(registration);
@@ -158,6 +239,26 @@
 
   function init(options) {
     els.dialog = options.dialog;
+    els.flowDialog = options.flowDialog;
+    els.flowCategory = options.flowCategory;
+    els.flowArt = options.flowArt;
+    els.flowTitle = options.flowTitle;
+    els.flowMeta = options.flowMeta;
+    els.flowDescription = options.flowDescription;
+    els.detailCapacity = options.detailCapacity;
+    els.detailStep = options.detailStep;
+    els.ticketStep = options.ticketStep;
+    els.chooseTickets = options.chooseTickets;
+    els.ticketIcon = options.ticketIcon;
+    els.ticketName = options.ticketName;
+    els.ticketMeta = options.ticketMeta;
+    els.quantity = options.quantity;
+    els.seatTotal = options.seatTotal;
+    els.quantityDecrease = options.quantityDecrease;
+    els.quantityIncrease = options.quantityIncrease;
+    els.backToEvent = options.backToEvent;
+    els.continueDetails = options.continueDetails;
+    els.backToTickets = options.backToTickets;
     els.form = options.form;
     els.eventIcon = options.eventIcon;
     els.eventName = options.eventName;
@@ -176,6 +277,17 @@
     els.errPhone = options.errPhone;
 
     els.form.addEventListener('submit', handleSubmit);
+    els.chooseTickets.addEventListener('click', showTicketReview);
+    els.backToEvent.addEventListener('click', function () {
+      els.ticketStep.hidden = true;
+      els.detailStep.hidden = false;
+      setFlowStep('event');
+      els.chooseTickets.focus();
+    });
+    els.quantityDecrease.addEventListener('click', function () { currentQuantity -= 1; updateQuantity(); });
+    els.quantityIncrease.addEventListener('click', function () { currentQuantity += 1; updateQuantity(); });
+    els.continueDetails.addEventListener('click', openRegistration);
+    els.backToTickets.addEventListener('click', backToTickets);
 
     /* Live feedback: clear an error as soon as the field becomes valid,
        and only re-flag a touched field once it had an error. */
@@ -193,6 +305,6 @@
 
   App.registration = {
     init: init,
-    open: open
+    open: showEventDetails
   };
 })();

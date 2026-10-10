@@ -59,8 +59,8 @@
           '<p class="card-desc">' + esc(event.description) + '</p>' +
           '<div class="card-footer">' +
             '<span class="seat-pill ' + seat.cls + '" data-seat aria-label="' + esc(seat.label) + '">' + esc(seat.text) + '</span>' +
-            '<button class="btn btn-primary card-btn" type="button" data-register' + (event.seatsLeft <= 0 ? ' disabled aria-disabled="true"' : '') + '>' +
-              (event.seatsLeft <= 0 ? 'Sold out' : 'Register') +
+            '<button class="btn btn-primary card-btn" type="button" data-event-details aria-label="View details for ' + esc(event.name) + '">' +
+              'View event <span aria-hidden="true">→</span>' +
             '</button>' +
           '</div>' +
         '</div>' +
@@ -93,7 +93,8 @@
     var cat = App.state.activeCategory;
     return App.state.events.filter(function (e) {
       var catOk = cat === 'all' || e.category === cat;
-      var searchOk = !q || e.name.toLowerCase().indexOf(q) !== -1;
+      var searchable = [e.name, e.category, e.date, e.time, e.venue, e.description].join(' ').toLowerCase();
+      var searchOk = !q || searchable.indexOf(q) !== -1;
       return catOk && searchOk;
     });
   }
@@ -139,7 +140,6 @@
     if (!event || !node) return;
 
     var seat = node.querySelector('[data-seat]');
-    var btn = node.querySelector('[data-register]');
     var info = seatInfo(event);
 
     seat.className = 'seat-pill ' + info.cls;
@@ -148,14 +148,16 @@
 
     if (event.seatsLeft <= 0) {
       node.classList.add('is-full');
-      btn.disabled = true;
-      btn.setAttribute('aria-disabled', 'true');
-      btn.textContent = 'Sold out';
+      if (!node.querySelector('.card-ribbon')) {
+        var ribbon = document.createElement('span');
+        ribbon.className = 'card-ribbon';
+        ribbon.innerHTML = ICONS.lock + 'Sold out';
+        node.querySelector('.card-band').appendChild(ribbon);
+      }
     } else {
       node.classList.remove('is-full');
-      btn.disabled = false;
-      btn.removeAttribute('aria-disabled');
-      btn.textContent = 'Register';
+      var ribbon = node.querySelector('.card-ribbon');
+      if (ribbon) ribbon.remove();
     }
 
     if (animate) {
@@ -184,6 +186,7 @@
   function reset() {
     App.state.query = '';
     if (els.search) els.search.value = '';
+    if (els.searchClear) els.searchClear.hidden = true;
     App.state.activeCategory = 'all';
     buildChips();
     render({ animate: true });
@@ -193,6 +196,7 @@
     els.grid = options.grid;
     els.filterBar = options.filterBar;
     els.search = options.search;
+    els.searchClear = options.searchClear;
     els.resultsCount = options.resultsCount;
     els.emptyState = options.emptyState;
 
@@ -206,13 +210,23 @@
 
     els.search.addEventListener('input', function (e) {
       setQuery(e.target.value);
+      if (options.searchClear) options.searchClear.hidden = !e.target.value;
     });
 
+    if (options.searchClear) {
+      options.searchClear.addEventListener('click', function () {
+        els.search.value = '';
+        setQuery('');
+        options.searchClear.hidden = true;
+        els.search.focus();
+      });
+    }
+
     els.grid.addEventListener('click', function (e) {
-      var btn = e.target.closest('[data-register]');
-      if (!btn || btn.disabled) return;
+      var btn = e.target.closest('[data-event-details]');
+      if (!btn) return;
       var card = e.target.closest('.event-card');
-      if (card && App.events.onRegister) App.events.onRegister(card.dataset.id);
+      if (card && App.events.onDetails) App.events.onDetails(card.dataset.id);
     });
   }
 
@@ -224,6 +238,6 @@
     setQuery: setQuery,
     reset: reset,
     getFiltered: getFiltered,
-    onRegister: null
+    onDetails: null
   };
 })();

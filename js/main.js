@@ -34,6 +34,7 @@
 
     App.ui.init({
       registerDialog: byId('register-dialog'),
+      eventFlowDialog: byId('event-flow-dialog'),
       successDialog: byId('success-dialog'),
       myEventsDialog: byId('my-events-dialog'),
       myeList: byId('mye-list'),
@@ -52,11 +53,32 @@
       filterBar: byId('filter-bar'),
       search: byId('search'),
       resultsCount: byId('results-count'),
-      emptyState: byId('empty-state')
+      emptyState: byId('empty-state'),
+      searchClear: byId('search-clear')
     });
 
     App.registration.init({
       dialog: byId('register-dialog'),
+      flowDialog: byId('event-flow-dialog'),
+      flowCategory: byId('flow-category'),
+      flowArt: byId('event-detail-art'),
+      flowTitle: byId('flow-title'),
+      flowMeta: byId('detail-meta'),
+      flowDescription: byId('event-detail-description'),
+      detailCapacity: byId('detail-capacity'),
+      detailStep: byId('event-detail-step'),
+      ticketStep: byId('ticket-review-step'),
+      chooseTickets: byId('choose-tickets'),
+      ticketIcon: byId('ticket-summary-icon'),
+      ticketName: byId('ticket-summary-name'),
+      ticketMeta: byId('ticket-summary-meta'),
+      quantity: byId('ticket-quantity'),
+      seatTotal: byId('ticket-seat-total'),
+      quantityDecrease: byId('quantity-decrease'),
+      quantityIncrease: byId('quantity-increase'),
+      backToEvent: byId('back-to-event'),
+      continueDetails: byId('continue-to-details'),
+      backToTickets: byId('reg-back-to-tickets'),
       form: byId('reg-form'),
       eventIcon: byId('reg-event-icon'),
       eventName: byId('reg-event-name'),
@@ -75,7 +97,7 @@
     });
 
     /* Discovery -> registration handoff. */
-    App.events.onRegister = App.registration.open;
+    App.events.onDetails = App.registration.open;
 
     var resetBtn = byId('empty-reset');
     if (resetBtn) resetBtn.addEventListener('click', App.events.reset);

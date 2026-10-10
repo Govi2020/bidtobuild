@@ -124,6 +124,20 @@
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
+  function wireDemoNotice() {
+    var notice = document.getElementById('hero-cookie-notice');
+    var dismiss = document.getElementById('hero-cookie-dismiss');
+    var key = 'prism26.demoNoticeDismissed.v1';
+    if (!notice || !dismiss) return;
+    try {
+      if (window.localStorage.getItem(key) === 'true') notice.hidden = true;
+    } catch (err) { /* storage may be unavailable */ }
+    dismiss.addEventListener('click', function () {
+      notice.hidden = true;
+      try { window.localStorage.setItem(key, 'true'); } catch (err) { /* optional preference */ }
+    });
+  }
+
   /* ---------- Persistence (local demo only) ---------- */
   function loadRegistrations() {
     try {
@@ -150,7 +164,7 @@
   function applyRegistrationsToSeats() {
     App.state.registrations.forEach(function (r) {
       var event = App.state.findEvent(r.eventId);
-      if (event) event.seatsLeft = Math.max(0, event.seatsLeft - 1);
+      if (event) event.seatsLeft = Math.max(0, event.seatsLeft - (Number(r.quantity) || 1));
     });
   }
 
@@ -183,7 +197,7 @@
             '<p class="mye-item-meta">' + escapeHtml(event.date + ' \u00b7 ' + event.time) + '</p>' +
           '</div>' +
           '<span class="seat-pill ' + (event.seatsLeft <= 0 ? 'is-full' : '') + '" style="--c1:' + cat.c1 + '">' +
-            escapeHtml(r.name) +
+            escapeHtml(r.name + ((Number(r.quantity) || 1) > 1 ? ' · ' + r.quantity + ' guests' : '')) +
           '</span>' +
         '</div>';
     }).join('');
@@ -204,8 +218,9 @@
   function showSuccess(registration, event) {
     var msg = els.successMsg;
     if (msg) {
+      var quantity = Number(registration.quantity) || 1;
       msg.innerHTML = 'Nice one, <strong>' + escapeHtml(registration.name) +
-        '</strong> — your seat for <strong>' + escapeHtml(event.name) + '</strong> is locked in.';
+        '</strong> — ' + (quantity === 1 ? 'your spot' : quantity + ' spots') + ' for <strong>' + escapeHtml(event.name) + '</strong> ' + (quantity === 1 ? 'is' : 'are') + ' reserved.';
     }
     if (els.successCard) els.successCard.hidden = false;
     if (els.successEventName) els.successEventName.textContent = event.name;
@@ -225,6 +240,7 @@
   /* ---------- Init ---------- */
   function init(options) {
     els.registerDialog = options.registerDialog;
+    els.eventFlowDialog = options.eventFlowDialog;
     els.successDialog = options.successDialog;
     els.myeDialog = options.myEventsDialog;
     els.myeList = options.myeList;
@@ -234,7 +250,7 @@
     els.successEventName = options.successEventName;
     els.successEventMeta = options.successEventMeta;
 
-    [els.registerDialog, els.successDialog, els.myeDialog].forEach(wireDialog);
+    [els.eventFlowDialog, els.registerDialog, els.successDialog, els.myeDialog].forEach(wireDialog);
 
     /* Restore demo registrations and sync seats before cards render. */
     App.state.registrations = loadRegistrations();
@@ -244,6 +260,7 @@
 
     observeReveals(document.querySelectorAll('.reveal'));
     wireHeader();
+    wireDemoNotice();
     startCountdown();
 
     els.myEventsBtn = options.myEventsBtn;
