@@ -248,21 +248,11 @@ h1, h2, h3, h4 {
 /* ---------- Hero ---------- */
 .hero {
   position: relative;
-  background: radial-gradient(120% 120% at 15% 0%, #3a3f6e 0%, var(--indigo-deep) 55%, #262949 100%);
+  background: var(--indigo-deep);
   color: var(--on-dark);
   overflow: hidden;
   padding: clamp(3rem, 7vw, 6rem) 0 0;
 }
-.hero-bg { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
-.hero-glow {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(70px);
-  opacity: .5;
-}
-.hero-glow-a { width: 380px; height: 380px; background: var(--red); top: -90px; left: -60px; }
-.hero-glow-b { width: 320px; height: 320px; background: var(--mustard); bottom: -120px; right: 8%; opacity: .32; }
-.hero-glow-c { width: 300px; height: 300px; background: var(--salmon); top: 30%; right: -80px; opacity: .35; }
 
 .hero-inner {
   position: relative;
@@ -358,7 +348,6 @@ h1, h2, h3, h4 {
   padding: 1.4rem;
   backdrop-filter: blur(8px);
   box-shadow: var(--shadow-3);
-  animation: floaty 7s ease-in-out infinite;
 }
 .poster-top { display: flex; justify-content: space-between; gap: .5rem; margin-bottom: 1rem; }
 .poster-chip {
@@ -387,50 +376,6 @@ h1, h2, h3, h4 {
   color: #fff;
 }
 .poster-stat span { font-size: .7rem; color: var(--on-dark-soft); }
-
-.float-chip {
-  position: absolute;
-  background: #fff;
-  color: var(--ink);
-  font-size: .82rem;
-  font-weight: 600;
-  padding: .5rem .85rem;
-  border-radius: var(--r-full);
-  box-shadow: var(--shadow-3);
-  animation: floaty 6s ease-in-out infinite;
-}
-.float-chip-1 { top: 6%; left: -6%; animation-delay: .4s; }
-.float-chip-2 { bottom: 20%; right: -7%; animation-delay: 1.1s; }
-.float-chip-3 { bottom: -2%; left: 4%; animation-delay: 1.8s; }
-
-@keyframes floaty {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-11px); }
-}
-
-/* Ticker */
-.hero-ticker {
-  border-top: 1px solid rgba(255, 255, 255, .14);
-  background: rgba(0, 0, 0, .16);
-  overflow: hidden;
-  padding: .8rem 0;
-}
-.ticker-track {
-  display: flex;
-  gap: 1.6rem;
-  white-space: nowrap;
-  width: max-content;
-  animation: ticker 26s linear infinite;
-  color: var(--on-dark-soft);
-  font-family: var(--font-display);
-  font-weight: 500;
-  letter-spacing: .05em;
-}
-.ticker-track span:nth-child(even) { color: var(--mustard); }
-@keyframes ticker {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
 
 /* ---------- About strip ---------- */
 .about-strip { padding: clamp(2.4rem, 5vw, 3.6rem) 0; background: var(--bg); }
@@ -763,7 +708,7 @@ h1, h2, h3, h4 {
 }
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.6fr 1fr 1.2fr 1fr;
+  grid-template-columns: 1.6fr 1fr 1.2fr;
   gap: 2rem;
   padding-bottom: 2.4rem;
 }
@@ -788,18 +733,6 @@ h1, h2, h3, h4 {
 }
 .footer-col a:hover, .footer-link:hover { color: #fff; transform: translateX(3px); }
 .footer-static { font-size: .92rem; }
-
-.social-row { display: flex; gap: .6rem; }
-.social-link {
-  width: 42px; height: 42px;
-  display: grid; place-items: center;
-  border-radius: var(--r-sm);
-  background: rgba(255, 255, 255, .08);
-  color: var(--on-dark-soft);
-  transition: background-color .2s var(--ease), color .2s var(--ease), transform .2s var(--ease);
-}
-.social-link svg { width: 21px; height: 21px; }
-.social-link:hover { background: var(--red); color: #fff; transform: translateY(-3px); }
 
 .footer-bottom {
   display: flex;
@@ -1034,7 +967,6 @@ h1, h2, h3, h4 {
 @media (max-width: 1024px) {
   .hero-inner { grid-template-columns: 1fr; text-align: left; }
   .hero-art { order: -1; margin-bottom: 1rem; }
-  .poster-card { animation: none; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 
@@ -1064,8 +996,6 @@ h1, h2, h3, h4 {
 
 @media (max-width: 560px) {
   .events-grid { grid-template-columns: 1fr; }
-  .float-chip-1 { left: 0; }
-  .float-chip-2 { right: 0; }
   .hero-actions { gap: .6rem; }
   .hero-actions .btn { flex: 1 1 auto; }
   .countdown-grid { gap: .4rem; }
@@ -1086,6 +1016,4 @@ h1, h2, h3, h4 {
     transition-duration: .001ms !important;
   }
   .reveal { opacity: 1; transform: none; }
-  .ticker-track { animation: none; }
-  .poster-card, .float-chip { animation: none; }
 }
