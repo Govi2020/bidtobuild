@@ -1,0 +1,352 @@
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PRISM '26 — the campus festival of technology, culture and everything in between. Browse events, compare seats and register in seconds.">
+  <title>PRISM '26 · Campus Event Hub</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#events">Skip to events</a>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="PRISM 26 home">
+        <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+          <polygon points="20,4 32,28 26,10 33,32 20,36 7,32 14,10 8,28" fill="currentColor"/>
+          <circle cx="33" cy="8" r="2.6" fill="#F4A261"/>
+          <circle cx="6" cy="6" r="1.8" fill="#E63946"/>
+        </svg>
+        <span class="brand-name">PRISM<sup>&rsquo;26</sup></span>
+      </a>
+
+      <nav class="site-nav" aria-label="Primary">
+        <a href="#top">Home</a>
+        <a href="#events">Events</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <button class="btn btn-tonal btn-sm my-events-btn" id="my-events-btn" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6l7-3z" fill="currentColor" opacity=".9"/></svg>
+        My Events <span class="badge-dot" id="my-events-count" hidden>0</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="hero-glow hero-glow-a"></div>
+        <div class="hero-glow hero-glow-b"></div>
+        <div class="hero-glow hero-glow-c"></div>
+      </div>
+
+      <div class="container hero-inner">
+        <div class="hero-copy reveal" style="--d:0">
+          <p class="eyebrow">Bit2Build · Campus Fest 2026</p>
+          <h1 class="hero-title">
+            <span class="t-stroke">Break</span> into
+            <span class="t-gradient">color.</span>
+          </h1>
+          <p class="hero-sub">
+            Three days, five stages, one campus. Hackathons, gigs, game wars and
+            every creative craft in between — PRISM is where your tribe gathers.
+            Pick an event, snag a seat, show up, shine.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary btn-lg" href="#events">
+              Browse events
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a class="btn btn-ghost btn-lg" href="#about">Fest at a glance</a>
+          </div>
+
+          <div class="countdown" aria-label="Time until the fest begins">
+            <p class="countdown-caption">Fest kicks off in</p>
+            <div class="countdown-grid">
+              <div class="cd-cell"><span class="cd-num" id="cd-days">--</span><span class="cd-label">days</span></div>
+              <div class="cd-cell"><span class="cd-num" id="cd-hours">--</span><span class="cd-label">hrs</span></div>
+              <div class="cd-cell"><span class="cd-num" id="cd-mins">--</span><span class="cd-label">min</span></div>
+              <div class="cd-cell"><span class="cd-num" id="cd-secs">--</span><span class="cd-label">sec</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-art reveal" aria-hidden="true" style="--d:1">
+          <div class="poster-card">
+            <div class="poster-top">
+              <span class="poster-chip">PRISM&rsquo;26</span>
+              <span class="poster-chip poster-chip-warm">SEATS FILLING</span>
+            </div>
+
+            <svg class="poster-prism" viewBox="0 0 220 220">
+              <defs>
+                <linearGradient id="pg-a" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#E63946"/>
+                  <stop offset="1" stop-color="#E07A8D"/>
+                </linearGradient>
+                <linearGradient id="pg-b" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#F4A261"/>
+                  <stop offset="1" stop-color="#E63946"/>
+                </linearGradient>
+                <linearGradient id="pg-c" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#45497A"/>
+                  <stop offset="1" stop-color="#6B7B6A"/>
+                </linearGradient>
+              </defs>
+              <polygon points="110,18 172,152 48,152" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="2"/>
+              <polygon points="110,40 158,138 62,138" fill="url(#pg-a)"/>
+              <polygon points="110,58 142,122 78,122" fill="url(#pg-b)"/>
+              <polygon points="110,80 126,102 94,102" fill="url(#pg-c)"/>
+              <circle cx="182" cy="34" r="9" fill="#fff" opacity=".9"/>
+              <circle cx="200" cy="56" r="4.5" fill="#fff" opacity=".55"/>
+              <circle cx="168" cy="14" r="3.5" fill="#fff" opacity=".4"/>
+            </svg>
+
+            <div class="poster-stats">
+              <div class="poster-stat"><strong>40+</strong><span>events &amp; tracks</span></div>
+              <div class="poster-stat"><strong>2.4k</strong><span>seats to grab</span></div>
+              <div class="poster-stat"><strong>3</strong><span>days of chaos</span></div>
+            </div>
+          </div>
+
+          <div class="float-chip float-chip-1">&#127918; Gaming</div>
+          <div class="float-chip float-chip-2">&#128119; Music</div>
+          <div class="float-chip float-chip-3">&#127922; Dance</div>
+        </div>
+      </div>
+
+      <div class="hero-ticker" aria-hidden="true">
+        <div class="ticker-track">
+          <span>HackSphere</span><span>&bull;</span>
+          <span>Pixel Playoffs</span><span>&bull;</span>
+          <span>StageFlux</span><span>&bull;</span>
+          <span>Groove Yard</span><span>&bull;</span>
+          <span>CodeSprint</span><span>&bull;</span>
+          <span>Futurist Forge</span><span>&bull;</span>
+          <span>Thunder Court</span><span>&bull;</span>
+          <span>Craft Carnival</span><span>&bull;</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT SNAPS ============ -->
+    <section class="about-strip" id="about" aria-label="Why PRISM">
+      <div class="container about-grid">
+        <article class="about-item reveal" style="--d:0">
+          <div class="about-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v4m0 12v4M2 12h4m12 0h4M5 5l3 3m8 8l3 3m0-14l-3 3M8 16l-3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="3.4" fill="currentColor" opacity=".35"/></svg></div>
+          <div><h3>Something for everyone</h3><p>Technical pits, cultural stages, sports courts — 40+ events across 7 tracks, designed to be discovered.</p></div>
+        </article>
+        <article class="about-item reveal" style="--d:1">
+          <div class="about-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.6-9.2-9A5.6 5.6 0 0 1 12 6.4 5.6 5.6 0 0 1 21.2 12C19 16.4 12 21 12 21z" fill="currentColor" opacity=".3" stroke="currentColor" stroke-width="1.6"/></svg></div>
+          <div><h3>Seats are limited</h3><p>Every event has a real cap shown in real time. Grab your spot before the counter hits zero.</p></div>
+        </article>
+        <article class="about-item reveal" style="--d:2">
+          <div class="about-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.4 5.4L20 9l-4.4 4 1.2 6L12 15.8 7.2 19l1.2-6L4 9l5.6-.6z" fill="currentColor" opacity=".3" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+          <div><h3>One tap to register</h3><p>A focused, validated sign-up keeps it to seconds — no queues, no forms-tab mountain to climb.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ EVENTS ============ -->
+    <section class="events" id="events">
+      <div class="container">
+        <div class="events-head reveal">
+          <div>
+            <p class="eyebrow">This season at PRISM</p>
+            <h2 class="section-title">Find your event</h2>
+          </div>
+          <label class="search-box" for="search">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <input id="search" type="search" placeholder="Search events, e.g. HackSphere" autocomplete="off">
+          </label>
+        </div>
+
+        <div class="filter-bar reveal" id="filter-bar" role="group" aria-label="Filter events by category">
+          <button class="chip is-active" type="button" data-category="all" aria-pressed="true">All</button>
+        </div>
+
+        <p class="results-count" id="results-count" aria-live="polite"></p>
+
+        <div class="events-grid" id="events-grid"></div>
+
+        <div class="empty-state" id="empty-state" hidden>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-3.5-3.5M8.5 11h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <h3>Nothing matches that</h3>
+          <p>No events match your search and filter right now. Try a different keyword or category.</p>
+          <button class="btn btn-primary" type="button" id="empty-reset">Reset filters</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CTA BAND ============ -->
+    <section class="cta-band" aria-label="Register now">
+      <div class="container cta-inner reveal">
+        <div>
+          <p class="eyebrow eyebrow-light">Don&rsquo;t refresh your luck</p>
+          <h2 class="cta-title">Your seat won&rsquo;t wait for you.</h2>
+        </div>
+        <a class="btn btn-warm btn-lg" href="#events">Grab a seat &rarr;</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer" id="contact">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="#top" aria-label="PRISM 26 home">
+          <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+            <polygon points="20,4 32,28 26,10 33,32 20,36 7,32 14,10 8,28" fill="currentColor"/>
+            <circle cx="33" cy="8" r="2.6" fill="#F4A261"/>
+            <circle cx="6" cy="6" r="1.8" fill="#E63946"/>
+          </svg>
+          <span class="brand-name">PRISM<sup>&rsquo;26</sup></span>
+        </a>
+        <p class="footer-tag">Break into color. The campus festival where technology, art and energy collide.</p>
+      </div>
+
+      <nav class="footer-col" aria-label="Footer navigation">
+        <h4>Explore</h4>
+        <a href="#top">Home</a>
+        <a href="#events">Events</a>
+        <a href="#about">About</a>
+        <button type="button" class="footer-link" id="footer-my-events">My Events</button>
+      </nav>
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:fest@prism26.campus.in">fest@prism26.campus.in</a>
+        <a href="tel:+911234567890">+91 12345 67890</a>
+        <span class="footer-static">Main Quad, Campus Block A</span>
+      </div>
+
+      <div class="footer-col footer-col-social">
+        <h4>Follow the noise</h4>
+        <div class="social-row">
+          <a class="social-link" href="#" aria-label="Instagram (opens in new tab)" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.4" fill="currentColor"/></svg>
+          </a>
+          <a class="social-link" href="#" aria-label="Discord (opens in new tab)" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 9a9 9 0 0 1 8 0m-8 3.5h8M7 6c2-1 8-1 10 0 2 4 .6 10 .6 10l2 2-3.3 1.5-1-2M17 6c-2-1-8-1-10 0m5 9.5l-2 2M7 6v13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="social-link" href="#" aria-label="X / Twitter (opens in new tab)" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4l7.2 9.3L4.6 20h2.6l5-5.4 4.4 5.4H20l-7.5-9.7L18.8 4h-2.6l-4.4 4.8L7.4 4z" fill="currentColor"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>&copy; 2026 PRISM &rsquo;26 · Campus Event Hub</span>
+      <span>Built with plain HTML, CSS &amp; JavaScript</span>
+    </div>
+  </footer>
+
+  <!-- ============ REGISTRATION DIALOG ============ -->
+  <dialog class="modal" id="register-dialog" aria-labelledby="reg-title">
+    <div class="modal-inner">
+      <button class="modal-close" type="button" data-close-dialog aria-label="Close registration">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+
+      <p class="eyebrow" id="reg-eyebrow">Reserve your seat</p>
+      <h2 class="modal-title" id="reg-title">Register for the event</h2>
+
+      <div class="reg-event" id="reg-event-summary">
+        <div class="reg-event-badge" id="reg-event-icon" aria-hidden="true"></div>
+        <div>
+          <p class="reg-event-name" id="reg-event-name">Event name</p>
+          <p class="reg-event-meta" id="reg-event-meta"></p>
+        </div>
+      </div>
+
+      <form id="reg-form" novalidate>
+        <div class="field" id="field-name">
+          <label for="reg-name">Full name</label>
+          <div class="input-wrap">
+            <input id="reg-name" name="name" type="text" placeholder="e.g. Aarav Kapoor" autocomplete="name" aria-describedby="err-name">
+          </div>
+          <p class="field-error" id="err-name" role="alert"></p>
+        </div>
+
+        <div class="field" id="field-email">
+          <label for="reg-email">Email address</label>
+          <div class="input-wrap">
+            <input id="reg-email" name="email" type="email" placeholder="you@campus.in" autocomplete="email" aria-describedby="err-email">
+          </div>
+          <p class="field-error" id="err-email" role="alert"></p>
+        </div>
+
+        <div class="field" id="field-phone">
+          <label for="reg-phone">Phone number</label>
+          <div class="input-wrap">
+            <input id="reg-phone" name="phone" type="tel" inputmode="tel" placeholder="+91 98765 43210" autocomplete="tel" aria-describedby="err-phone">
+          </div>
+          <p class="field-error" id="err-phone" role="alert"></p>
+        </div>
+
+        <p class="reg-seats-note" id="reg-seats-note" aria-live="polite"></p>
+
+        <div class="modal-actions">
+          <button class="btn btn-ghost-dark" type="button" data-close-dialog>Cancel</button>
+          <button class="btn btn-primary" type="submit" id="reg-submit">Confirm registration</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- ============ SUCCESS DIALOG ============ -->
+  <dialog class="modal modal-success" id="success-dialog" aria-labelledby="success-title">
+    <div class="modal-inner">
+      <div class="success-art" aria-hidden="true">
+        <svg class="success-check" viewBox="0 0 80 80">
+          <circle class="sc-ring" cx="40" cy="40" r="34"/>
+          <polyline class="sc-tick" points="22,41 35,53 58,29"/>
+        </svg>
+      </div>
+      <p class="eyebrow">You&rsquo;re in</p>
+      <h2 class="modal-title" id="success-title">Seat confirmed!</h2>
+      <p class="success-msg" id="success-msg"></p>
+      <div class="success-card" id="success-card" hidden>
+        <p class="success-card-label">Registered for</p>
+        <p class="success-card-name" id="success-event-name"></p>
+        <p class="success-card-meta" id="success-event-meta"></p>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost-dark" type="button" data-close-dialog>Back to events</button>
+        <button class="btn btn-tonal" type="button" id="success-my-events">View My Events</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ============ MY EVENTS DIALOG ============ -->
+  <dialog class="modal modal-mye" id="my-events-dialog" aria-labelledby="mye-title">
+    <div class="modal-inner">
+      <button class="modal-close" type="button" data-close-dialog aria-label="Close my events">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <p class="eyebrow">Your queue</p>
+      <h2 class="modal-title" id="mye-title">My Events</h2>
+      <p class="mye-sub">Registrations stored for this demo on this device.</p>
+      <div class="mye-list" id="mye-list"></div>
+    </div>
+  </dialog>
+
+  <!-- ============ SCRIPTS (classic, ordered — no build step) ============ -->
+  <script src="js/data.js"></script>
+  <script src="js/events.js"></script>
+  <script src="js/registration.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

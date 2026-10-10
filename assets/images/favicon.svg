@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="PRISM">
+  <rect width="64" height="64" rx="15" fill="#45497A"/>
+  <polygon points="32,9 47,41 37,20 49,45 32,56 15,45 27,20 17,41" fill="#F4A261"/>
+  <circle cx="49" cy="13" r="4" fill="#E63946"/>
+  <circle cx="14" cy="12" r="3" fill="#E07A8D"/>
+</svg>
